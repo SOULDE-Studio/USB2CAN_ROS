@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>USB2CAN_ROS</name>
+  <name>usb2can_ros</name>
   <version>0.0.0</version>
-  <description>The USB2CAN_ROS package</description>
+  <description>The usb2can_ros package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
@@ -19,7 +19,7 @@
   <!-- Url tags are optional, but multiple are allowed, one per tag -->
   <!-- Optional attribute type can be: website, bugtracker, or repository -->
   <!-- Example: -->
-  <!-- <url type="website">http://wiki.ros.org/USB2CAN_ROS</url> -->
+  <!-- <url type="website">http://wiki.ros.org/usb2can_ros</url> -->
 
 
   <!-- Author tags are optional, multiple are allowed, one per tag -->

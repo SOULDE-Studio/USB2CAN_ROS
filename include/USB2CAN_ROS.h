@@ -3,10 +3,12 @@
 
 
 #include <ros/ros.h>
-#include <USB2CAN_ROS/CANFrameMsg.h>
+#include <usb2can_ros/CANFrameMsg.h>
 class USB2CAN_ROS_Node {
 public:
     USB2CAN_ROS_Node(ros::NodeHandle& nh);
+
+    ~USB2CAN_ROS_Node();
 
     void run();
 
@@ -19,6 +21,6 @@ private:
 
     ros::Publisher pub_;
 
-    void callback(const USB2CAN_ROS::CANFrameMsg::ConstPtr& msg);
+    void callback(const usb2can_ros::CANFrameMsg::ConstPtr& msg);
 };
 #endif

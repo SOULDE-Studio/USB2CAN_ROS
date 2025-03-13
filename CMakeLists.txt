@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(USB2CAN_ROS)
+project(usb2can_ros)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -104,7 +104,7 @@ generate_messages(
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
  INCLUDE_DIRS include
- LIBRARIES USB2CAN_ROS
+ LIBRARIES usb2can_ros
  CATKIN_DEPENDS roscpp rospy message_runtime std_msgs
  DEPENDS system_lib
 )
@@ -120,10 +120,10 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
   SDK
 )
-link_directories(SDK)
+link_directories(${PROJECT_SOURCE_DIR}/SDK)
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/USB2CAN_ROS.cpp
+#   src/${PROJECT_NAME}/usb2can_ros.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -149,7 +149,7 @@ add_executable(${PROJECT_NAME}_node src/USB2CAN_ROS_node.cpp src/USB2CAN_ROS.cpp
 ## Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}_node
   ${catkin_LIBRARIES}
-  usb_can_amd64
+  usb_can
 )
 
 #############
@@ -199,7 +199,7 @@ target_link_libraries(${PROJECT_NAME}_node
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_USB2CAN_ROS.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_usb2can_ros.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

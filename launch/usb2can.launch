@@ -1,0 +1,32 @@
+<launch>
+
+  <node
+    name="usb2can_ros_node0"
+    pkg="usb2can_ros"
+    type="usb2can_ros_node" 
+    output="screen">
+    <param name="device" type="string" value="USB2CAN0" />
+  </node>
+    <node
+    name="usb2can_ros_node1"
+    pkg="usb2can_ros"
+    type="usb2can_ros_node" 
+    output="screen">
+    <param name="device" type="string" value="USB2CAN1" />
+  </node>
+    <node
+    name="usb2can_ros_node2"
+    pkg="usb2can_ros"
+    type="usb2can_ros_node" 
+    output="screen">
+    <param name="device" type="string" value="USB2CAN2" />
+  </node>
+    <node
+    name="usb2can_ros_node3"
+    pkg="usb2can_ros"
+    type="usb2can_ros_node" 
+    output="screen">
+    <param name="device" type="string" value="USB2CAN3" />
+  </node>
+
+</launch>
