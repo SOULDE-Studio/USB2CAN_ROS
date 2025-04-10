@@ -134,8 +134,11 @@ link_directories(${PROJECT_SOURCE_DIR}/SDK)
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
+
 add_executable(${PROJECT_NAME}_node src/USB2CAN_ROS_node.cpp src/USB2CAN_ROS.cpp)
-add_executable(send_user_node src/user_node.cpp)
+
+
+add_executable(user_node src/user_node.cpp)
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
@@ -151,7 +154,7 @@ target_link_libraries(${PROJECT_NAME}_node
   ${catkin_LIBRARIES}
   usb_can
 )
-target_link_libraries(send_user_node
+target_link_libraries(user_node
   ${catkin_LIBRARIES}
 
 )

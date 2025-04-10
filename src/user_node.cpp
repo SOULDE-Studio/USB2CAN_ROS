@@ -1,5 +1,12 @@
 #include <ros/ros.h>
 #include <usb2can_ros/CANFrameMsg.h>
+void CANFrameMsgCallback(const usb2can_ros::CANFrameMsg::ConstPtr& msg){
+    //ROS_INFO("Received CAN Frame: %d", msg->can_id);
+    ROS_INFO("Received CAN Frame: %d", msg->data_length);
+    for(int i = 0; i < msg->data_length; i++){
+        ROS_INFO("Data[%d]: %d", i, msg->data[i]);
+    }
+}
 
 int main(int argc, char **argv){
     ros::init(argc, argv, "USB2CAN_ROS_node");
@@ -7,6 +14,7 @@ int main(int argc, char **argv){
     ros::NodeHandle nh;
     nh.getParam(ros::this_node::getName() +"/device", device);
     ros::Publisher pub = nh.advertise<usb2can_ros::CANFrameMsg>(device+"/can_tx", 1000);
+    ros::Subscriber sub = nh.subscribe(device+"/can_rx", 1000, &CANFrameMsgCallback);
 
     usb2can_ros::CANFrameMsg frame;
     ros::Rate loop_rate(1);
