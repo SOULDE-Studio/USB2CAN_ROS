@@ -31,9 +31,9 @@ void USB2CAN_ROS_Node::run(){
     FrameInfo frame_info;
     uint8_t frame_data[8];
     while(ros::ok()){
-        int ret = readUSBCAN(handler_, &frame.channel, &frame_info, frame_data, 10000);
+        int ret = readUSBCAN(handler_, &frame.channel, &frame_info, frame_data, 1000);
+        ros::spinOnce();
         if(ret < 0){
-
             continue;
         }
         frame.can_id = frame_info.canID;
@@ -43,8 +43,8 @@ void USB2CAN_ROS_Node::run(){
             frame.data[i] = frame_data[i];
         }
         pub_.publish(frame);
-
-        ros::spinOnce();
+     
+        
         loop_rate.sleep();
     }
 }
@@ -60,7 +60,8 @@ void USB2CAN_ROS_Node::callback(const usb2can_ros::CANFrameMsg::ConstPtr& msg){
         frame_data[i] = msg->data[i];
     }
 
-    sendUSBCAN(handler_, msg->channel, &frame_info, frame_data);
+    int ret = sendUSBCAN(handler_, msg->channel, &frame_info, frame_data);
+   
 }
 
 

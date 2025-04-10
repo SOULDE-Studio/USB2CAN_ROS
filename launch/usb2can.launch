@@ -1,5 +1,4 @@
 <launch>
-
   <node
     name="usb2can_ros_node0"
     pkg="usb2can_ros"
@@ -28,5 +27,11 @@
     output="screen">
     <param name="device" type="string" value="USB2CAN3" />
   </node>
-
+   <node
+    name="user_node"
+    pkg="usb2can_ros"
+    type="send_user_node" 
+    output="screen">
+    <param name="device" type="string" value="USB2CAN0" />
+      </node>
 </launch>
