@@ -1,11 +1,25 @@
 #include <ros/ros.h>
 #include <usb2can_ros/CANFrameMsg.h>
+
+#define STANDARD 0
+#define EXTENDED 1
+
+int can1_rx_count=0;
+int can1_tx_count=0;
+
+
 void CANFrameMsgCallback(const usb2can_ros::CANFrameMsg::ConstPtr& msg){
-    //ROS_INFO("Received CAN Frame: %d", msg->can_id);
-    ROS_INFO("Received CAN Frame: %d", msg->data_length);
-    for(int i = 0; i < msg->data_length; i++){
-        ROS_INFO("Data[%d]: %d", i, msg->data[i]);
+    can1_rx_count++;
+    if (can1_rx_count % 1000 == 0)
+    {
+        std::cout <<"    Send = "<<can1_tx_count <<"    Received CAN :" <<can1_rx_count <<"    loss rate : " <<100*(double)(can1_tx_count - can1_rx_count)/(double)can1_tx_count <<"%"<<std::endl; 
     }
+    
+    // ROS_INFO("Received CAN Frame: %d,channel: %d", msg->data_length, msg->channel);
+    // for(int i = 0; i < msg->data_length; i++){
+    //     ROS_INFO("Data[%d]: %d", i, msg->data[i]);
+    // }
+    // ROS_INFO("\r\n");
 }
 
 int main(int argc, char **argv){
@@ -13,15 +27,19 @@ int main(int argc, char **argv){
     std::string device;
     ros::NodeHandle nh;
     nh.getParam(ros::this_node::getName() +"/device", device);
+
     ros::Publisher pub = nh.advertise<usb2can_ros::CANFrameMsg>(device+"/can_tx", 1000);
+
     ros::Subscriber sub = nh.subscribe(device+"/can_rx", 1000, &CANFrameMsgCallback);
 
     usb2can_ros::CANFrameMsg frame;
-    ros::Rate loop_rate(1);
+    ros::Rate loop_rate(8000);
     while(ros::ok){
-        frame.channel = 2;
+        can1_tx_count++;
+
+        frame.channel = 2; //使用CAN2发送
         frame.can_id = 0x123;
-        frame.frame_type = 0;
+        frame.frame_type = STANDARD;//标准帧,
         frame.data_length = 8;
         frame.data[0] = 0x01;
         frame.data[1] = 0x02;
@@ -31,6 +49,7 @@ int main(int argc, char **argv){
         frame.data[5] = 0x06;
         frame.data[6] = 0x07;
         frame.data[7] = 0x08;
+
         pub.publish(frame);
         ros::spinOnce();
         loop_rate.sleep();

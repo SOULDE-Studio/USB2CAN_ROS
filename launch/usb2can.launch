@@ -27,11 +27,11 @@
     output="screen">
     <param name="device" type="string" value="USB2CAN3" />
   </node>
-   <node
+   <!-- <node
     name="user_node"
     pkg="usb2can_ros"
     type="user_node" 
     output="screen">
     <param name="device" type="string" value="USB2CAN0" />
-      </node>
+      </node> -->
 </launch>

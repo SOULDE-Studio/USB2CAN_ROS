@@ -1,5 +1,9 @@
 #include "USB2CAN_ROS.h"
 #include "usb_can.h"
+
+
+
+
 USB2CAN_ROS_Node::USB2CAN_ROS_Node(ros::NodeHandle &nh): nh_(nh){
     // read configuration
     std::string device_;
@@ -24,15 +28,23 @@ USB2CAN_ROS_Node::USB2CAN_ROS_Node(ros::NodeHandle &nh): nh_(nh){
 USB2CAN_ROS_Node::~USB2CAN_ROS_Node(){
     closeUSBCAN(handler_);
 }
+
+
 void USB2CAN_ROS_Node::run(){
     // start ROS loop with 100hz
-    ros::Rate loop_rate(100);
+    ros::Rate loop_rate(20000);
     usb2can_ros::CANFrameMsg frame;
     FrameInfo frame_info;
     uint8_t frame_data[8];
-    while(ros::ok()){
+
+    while(ros::ok())
+    {
+        //读取一次USB2CAN数据
         int ret = readUSBCAN(handler_, &frame.channel, &frame_info, frame_data, 1000);
+       
+        //从订阅话题读取要发给USB2CAN的数据
         ros::spinOnce();
+        
         if(ret < 0){
             continue;
         }
