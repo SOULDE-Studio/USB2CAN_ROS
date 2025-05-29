@@ -1,4 +1,5 @@
 # ROS Packages for DingLAB USB2CAN 
+USB转2路CAN模块购买地址： https://e.tb.cn/h.TBC18sl6EZKXUjL?tk=C5g5eLgyMf6HU071
 ## 前期准备
 本程序需要与肥猫机器人公司USB2CAN模块配合使用，请准备好模块与模块说明书、模块SDK，`并按照说明书使用install.sh文件安装USB2CAN规则文件，或手动安装规则文件，安装方法：`
 1. 进入项目目录下的SDK文件夹
