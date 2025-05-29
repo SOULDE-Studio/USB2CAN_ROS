@@ -3,7 +3,6 @@
 
 
 
-
 USB2CAN_ROS_Node::USB2CAN_ROS_Node(ros::NodeHandle &nh): nh_(nh){
     // read configuration
     std::string device_;
@@ -39,11 +38,13 @@ void USB2CAN_ROS_Node::run(){
 
     while(ros::ok())
     {
+
+        //从订阅话题读取要发给USB2CAN的数据
+        ros::spinOnce();
         //读取一次USB2CAN数据
         int ret = readUSBCAN(handler_, &frame.channel, &frame_info, frame_data, 1000);
        
-        //从订阅话题读取要发给USB2CAN的数据
-        ros::spinOnce();
+        
         
         if(ret < 0){
             continue;
@@ -63,6 +64,8 @@ void USB2CAN_ROS_Node::run(){
 
 void USB2CAN_ROS_Node::callback(const usb2can_ros::CANFrameMsg::ConstPtr& msg){
     //publish to USB2CAN
+   
+    
     FrameInfo frame_info;
     uint8_t frame_data[8];
     frame_info.canID = msg->can_id;

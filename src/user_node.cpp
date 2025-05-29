@@ -32,6 +32,9 @@ int main(int argc, char **argv){
 
     ros::Subscriber sub = nh.subscribe(device+"/can_rx", 1000, &CANFrameMsgCallback);
 
+    //延时0.5s，创建发布对象
+    ros::Duration(0.5).sleep();
+
     usb2can_ros::CANFrameMsg frame;
     ros::Rate loop_rate(8000);
     while(ros::ok){
