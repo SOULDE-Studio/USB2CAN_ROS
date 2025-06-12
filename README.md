@@ -1,4 +1,5 @@
 # ROS Packages for DingLAB USB2CAN 
+本程序提供USB2CAN模块ros包，其功能为自动识别已接入的模块，并按照其模块名发布接收和发送话题，实现ros话题调用can总线的功能。同时，提供使用一个例程，其功能为使用USB2CAN0的can2通道向can1通道发送数据，并在can1收到数据后以一定频率打印，发送和接收数据次数以及丢包率，运行程序前，需要将模块的两路can口用同向can线连接。
 USB转2路CAN模块购买地址： https://e.tb.cn/h.TBC18sl6EZKXUjL?tk=C5g5eLgyMf6HU071
 ## 前期准备
 本程序需要与肥猫机器人公司USB2CAN模块配合使用，请准备好模块与模块说明书、模块SDK，`并按照说明书使用install.sh文件安装USB2CAN规则文件，或手动安装规则文件，安装方法：`
